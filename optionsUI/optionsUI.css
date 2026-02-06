@@ -1,0 +1,289 @@
+@import url("../styles/theming.css");
+
+html {
+  background-color: var(--page-background-color);
+  color:            var(--page-color);
+  font:             var(--page-font);
+  font-size:        var(--page-font-size);
+  padding:          10px;
+
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select:    none; /* Firefox */
+  -ms-user-select:     none; /* IE10+/Edge */
+  user-select:         none; /* Standard */
+}
+
+body {
+  background-color: var(--body-background-color);
+}
+
+
+
+/* GENERIC */
+
+.display-none {
+  display: none;
+}
+
+.panel {
+  padding: 0 0.5em;
+}
+
+.button-panel  {
+  margin-top: 0.5em;
+  text-align: center;
+}
+
+.options-panel {
+  background-color: var(--panel-background-color);
+/*border:           1px solid var(--panel-border-color); */
+  border-radius:    5px;
+  padding:          0.5em;
+}
+
+.title {
+  color:            var(--title-color);
+  font-size:        var(--title-font-size);
+  font-weight:      var(--title-font-weight);
+}
+
+.panel-title {
+  color:            var(--subtitle-color);
+  font-size:        var(--subtitle-font-size);
+  font-weight:      var(--subtitle-font-weight);
+  margin-bottom:    2px;
+}
+
+.compact-list {
+  margin: 0;
+  padding: 0px 0px 0px 1.0em;
+}
+
+.compact-list > li {
+}
+
+input[type="checkbox"].open-close-check {
+  display: none;
+}
+
+input[type="checkbox"].open-close-check + label {
+  background-repeat: no-repeat;
+  border:            NONE;                    
+  cursor:            pointer !important;
+  height:            10px;
+  width:             10px;
+  display:           inline-block;
+  padding:           0px;;
+}
+
+input[type="checkbox"].open-close-check:checked + label {
+  background-image:  url("../images/icons/light-gray-triangle-outline-down_10x10.png") !important;
+}
+
+input[type="checkbox"].open-close-check:not(checked) + label {
+  background-image:  url("../images/icons/light-gray-triangle-outline-right_10x10.png") !important;
+}
+
+.options-open-close-panel {
+/*background-color:  var(--panel-background-color);*/
+/*border:            1px solid var(--panel-border-color);*/
+/*border-radius:     5px;*/
+  margin-left:       12px;
+/*padding:           4px;*/
+}
+
+.option-error {
+  display: NONE;
+}
+
+.option-error[error="true"] {
+  display:        flex;
+  flex-direction: row;
+}
+
+.option-error-icon-large {
+  height:         16px;
+  max-height:     16px;
+  max-width:      16px;
+  vertical-align: middle;
+  width:          16px;
+}
+
+.option-error-icon {
+  height:         8px;
+  max-height:     8px;
+  max-width:      8px;
+  vertical-align: middle;
+  width:          8px;
+}
+
+.option-error-text {
+  color:       RED !important;
+  margin-left: 0.25em;
+}
+
+
+
+/* FULL PAGE */
+#tiOptionsWrapper :is(button, input, th, tr, td, table, select, input[type="checkbox"] ~ label):-moz-window-inactive {
+  opacity: var(--window-inactive-opacity);
+}
+
+#tiOptionsWrapper {
+  padding:             1em;
+
+  /* grid layout */
+  display:             grid;
+
+  grid-row-gap:        1em;
+  grid-template-areas: "title"
+                       "extension-options"
+                       "chooser-options";
+  grid-template-rows:  min-content min-content auto;
+
+  #tiExtensionOptionsTitlePanel {
+    grid-area: title;
+  }
+
+  #tiExtensionOptionsPanel {
+    grid-area: extension-options;
+  }
+}
+
+#tiExtensionOptionsTitlePanel {
+  margin-bottom: 1.0em;
+}
+
+
+
+#tiExtensionOptionsPanel {
+
+  /* grid layout */
+  display:               grid;
+
+  grid-template-areas:   "options spacer";
+  grid-template-columns: max-content auto;
+/*grid-template-rows:    min-content min-content; */
+
+  #tiExtensionOptions {
+    grid-area: options;
+  }
+  #tiExtensionOptionsPanelSpacer {
+    grid-area: spacer;
+  }
+}
+
+#tiExtensionOptions {
+}
+
+
+
+/* BUTTONS IN GENERAL */
+
+#tiOptionsWrapper button.extension-icon-button {
+  background-color:    transparent !important;
+  background-position: center;
+  background-repeat:   no-repeat;
+  background-size:     cover;
+  border:              1px solid transparent;
+  cursor:              pointer;
+  display:             block;
+  height:              10px;
+  min-height:          10px;
+  margin:              2px 0px 0px 0px;
+  padding:             0;
+  width:               10px;
+  min-width:           10px;
+  -moz-appearance:     none;
+}
+
+
+
+/* ICON BUTTONS IN GENERAL */
+#tiOptionsWrapper button.extension-icon-button {
+  height:     24px;
+  min-height: 24px;
+  min-width:  24px;
+  width:      24px;
+}
+
+
+
+#tiOptionsWrapper input:is([type="checkbox"], [type="radio"]):not([disabled]) { /* any checkbox or radio button */
+  cursor: pointer;
+  & ~ label[for] {
+    cursor: pointer;
+  }
+}
+#tiOptionsWrapper input:is([type="checkbox"], [type="radio"])[disabled] { /* any checkbox or radio button */
+  cursor: var(--cursor-disabled);
+}
+
+#tiOptionsWrapper td:has(input:is([type="text"], [type="number"])) { /* any text or number field inside a <td> */
+  padding-right:    1.0em;
+}
+#tiOptionsWrapper input:is([type="text"], [type="number"]):not([disabled]) { /* any text or number field */
+  color:            black;       /* MABXXX MOVE TO theming.css */
+  text-shadow:      none;
+}
+#tiOptionsWrapper input:is[type="number"]:not([disabled]) { /* any number field */
+  cursor:           pointer;
+}
+#tiOptionsWrapper input:is([type="text"], [type="number"])[disabled] { /* any disabled text or number field */
+}
+
+
+
+/* Anything done with non-specific selectors can be influenced
+ * by outsiders, e.g. userChrome.css
+ */
+
+/* BACICALLY ALMOST NONE OF THIS BUTTON CRAP EVEN WORKS - THANKS FOR WASING MY TIME, !important */
+/* I could not get ANY variables to work, not from themes.css, AND not locally */
+#tiOptionsWrapper button:not(.extension-icon-button) {
+  background-image: NONE !important;
+  border:           1px solid transparent;
+  border-radius:    0.5em;
+  cursor:           pointer;
+  font:             var(--button-font);
+  font-size:        var(--button-font-size);
+  height:           1.5rem;
+  margin:           0 ;
+  padding:          0.8rem 1.1rem;
+  text-align:       left;
+  text-decoration:  none;
+  text-shadow:      none;
+  -moz-appearance:  none;
+  appearance:       none;
+
+  & > label {
+    cursor:         inherit;
+  }
+}
+
+#tiOptionsWrapper button:not(.extension-icon-button, [disabled]) {
+  background-color: rgb(110, 110, 114);
+  border-color:     rgb(200, 200, 200);
+  color:            rgb(250, 250, 250);
+  color:            BLACK; /* yeah, this does NOT work */
+}
+
+#tiOptionsWrapper button:not(.extension-icon-button)[disabled] {
+/*background-color: rgb(75, 75, 75);*/
+/*border-color:     rgb(90, 90, 90);*/
+/*color:            rgb(120, 120, 120); /* does even THIS work? NO. */
+  cursor:           var(--cursor-disabled);
+  opacity:          var(--window-inactive-opacity);
+}
+
+#tiOptionsWrapper button:not(.extension-icon-button, [disabled]):hover {
+  background-color: rgb(60, 160, 165);
+  background-image: NONE !important;
+  border-color:     rgb(240, 240, 240);
+  color:            rgb(255, 255, 255);
+  text-shadow:      1px 1px rgb(20, 20, 20);
+}
+
+#tiOptionsWrapper button:not(.extension-icon-button):-moz-window-inactive {
+  opacity: var(--window-inactive-opacity);
+}

@@ -1,0 +1,96 @@
+:root { /* default to dark */
+  --window-inactive-opacity:                       0.8;
+
+  --cursor-disabled:                               not-allowed;
+
+  --page-background-color:                         rgb(  47,  47,  55 );
+  --page-color:                                    rgb( 215, 215, 215 );
+  --page-font:                                     message-box;
+  --page-font-size:                                1.25em;
+  --page-text-shadow:                              rgb(  20,  20,  20 );
+
+  --body-background-color:                         rgba(100, 100, 110, 0.8);                      
+
+  --title-background-color:                        transparent;
+  --title-border-color:                            transparent;
+  --title-border-radius:                           0px;
+  --title-color:                                   rgb( 175, 228, 228 );
+  --title-font-size:                               1.50em;
+  --title-font-weight:                             bold;
+  --title-line-height:                             1.3em;
+
+  --subtitle-background-color:                     transparent;
+  --subtitle-border-color:                         transparent;
+  --subtitle-border-radius:                        0px;
+  --subtitle-color:                                rgb( 175, 228, 228 );
+  --subtitle-font-size:                            1.0em;
+  --subtitle-font-weight:                          bold;
+  --subtitle-line-height:                          1.25em;
+
+  --panel-background-color:                        rgb(  63,  63,  70 );
+  --panel-border-color:                            rgb(  35,  35,  39 );
+
+  --message-text-background-color:                 transparent; /* rgb( 250, 240, 240 ); */
+  --message-text-border:                           NONE; /* 1px solid var(--message-text-color); */
+  --message-text-color:                            rgb(  80, 255,  80 );
+  --message-text-font:                             inherit;
+  --message-text-font-size:                        inherit;
+  --message-text-font-weight:                      BOLDER;
+
+
+
+  --button-background-color:                       transparent; /* rgb( 110, 110, 114 ); */
+  --button-border-color:                           rgb( 200, 200, 200 );
+  --button-color:                                  rgb( 250, 250, 250 );
+  --button-font:                                   message-box;
+  --button-font-size:                              1em;
+
+  --button-disabled-background-color:              rgb( 129, 129, 143 );
+  --button-disabled-border-color:                  rgb( 160, 160, 160 );
+  --button-disabled-color:                         rgb(  80,  80,  85 );
+
+  --button-hover-background-color:                 rgb(  60, 160, 165 );
+  --button-hover-border-color:                     rgb( 240, 240, 240 );
+  --button-hover-color:                            rgb( 255, 255, 255 );
+  --button-hover-text-shadow-color:                rgb(  20,  20,  20 );
+  --button-hover-text-shadow:                      1px 1px var(--button-hover-text-shadow-color);
+
+  --button-selected-background-color:              rgb(  77, 116, 159 );
+  --button-selected-border-color:                  rgb(  50,  50,  50 );
+  --button-selected-color:                         rgb( 255, 255, 255 );
+  --button-selected-text-shadow-color:             rgb(  20,  20,  20 );
+  --button-selected-text-shadow:                   1px 1px var(--button-selected-text-shadow-color);
+
+  --button-cancel-background-color:                transparent; /* rgb(  19, 115, 217 ); */
+  --button-cancel-color:                           rgb( 250, 250, 250 );
+  --button-cancel-disabled-background-color:       rgb( 129, 129, 143 );
+  --button-cancel-disabled-color:                  rgb(  80,  80,  85 );
+  --button-cancel-hover-background-color:          rgb(  60, 160, 165 );
+  --button-cancel-hover-color:                     rgb( 255, 255, 255 );
+
+  --button-save-background-color:                  rgb(  19, 115, 217 );
+  --button-save-color:                             rgb( 250, 250, 250 );
+  --button-save-disabled-background-color:         rgb( 129, 129, 143 );
+  --button-save-disabled-color:                    rgb(  80,  80,  85 );
+  --button-save-hover-background-color:            rgb(  28, 131, 228 );
+  --button-save-hover-color:                       rgb( 255, 255, 255 );
+}
+
+@media (prefers-color-scheme: light) { /*** MABXXX THESE HAVE NOT BEEN KEPT UP-TO-DATE AT ALL!!!!! ***/
+  :root {
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root { /* using defaults (above) */
+  }
+}
+
+:root { /* FOR TESTING */
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .action-buttons label {
+    transition: background-color .15s, border-color .15s
+  }
+}

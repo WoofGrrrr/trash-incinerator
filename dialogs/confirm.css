@@ -1,0 +1,138 @@
+@import url("../styles/theming.css");
+
+html {
+  background-color: var(--page-background-color);
+  color:            var(--page-color);
+  font:             var(--page-font);
+  font-size:        var(--page-font-size);
+  padding:          10px;
+
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select:    none; /* Firefox */
+  -ms-user-select:     none; /* IE10+/Edge */
+  user-select:         none; /* Standard */
+}
+
+body {
+  background-color: var(--body-background-color);
+  height:           100%;
+
+}
+
+#ConfirmDialog {
+  align-items:      center;
+  background-color: var(--page-background-color);
+  height:           100%;
+  justify-content:  center;
+  left:             0;
+  margin:           0.8em auto;
+  position:         fixed;
+  top:              0;
+  width:            100%;
+  z-index:          1000;
+}
+
+#ConfirmDialogTitlePanel {
+  background-color: var(--title-background-color);
+  border:           1px solid var(--title-border-color);
+  border-radius:    var(--title-border-radius);
+  color:            var(--title-color);
+  font-size:        var(--title-font-size);
+  font-weight:      var(--title-font-weight);
+  line-height:      var(--title-line-height);
+  padding:          1.0em;
+  text-align:       center;
+}
+
+#ConfirmDialogTitleLabel {
+}
+
+#ConfirmDialogMessagesPanelWrapper {
+  display:          grid;
+  grid-template-areas: "left-spacer messages right-spacer";
+  grid-template-columns: auto max-content auto;
+
+  & #ConfirmDialogMessagesPanel {
+    grid-area: messages;
+  }
+
+  & #ConfirmDialogMessagesLeftSpacer {
+    grid-area: left-spacer;
+  }
+
+  & #ConfirmDialogMessagesRightSpacer {
+    grid-area: right-spacer;
+  }
+}
+
+#ConfirmDialogMessagesPanel {
+  text-align: center;
+}
+
+#ConfirmDialogButtonPanel {
+  display:          flex;
+  justify-content:  center;
+  margin-top:       2.0em;
+}
+
+.confirm-dialog-title {
+}
+
+.confirm-dialog-message {
+}
+
+#ConfirmDialog .confirm-dialog-button {
+  margin:           10px;
+  cursor:           pointer;
+}
+
+
+
+/* Anything done with non-specific selectors can be influenced
+ * by outsiders, e.g. userChrome.css, userContent.css
+ */
+#ConfirmDialog button {
+  background-image: NONE !important;
+  border:           1px solid transparent;
+  border-radius:    0.5em;
+  cursor:           pointer;
+  font:             var(--menu-font);
+  font-size:        var(--menu-font-size);
+  font-size:        1em;
+  height:           1.5em;
+  margin:           0;
+  text-align:       left;
+  text-decoration:  none;
+  text-shadow:      none;
+  -moz-appearance:  none;
+}
+
+#ConfirmDialog button:not([disabled]) {
+  background-color: var(--button-background-color);
+  border-color:     var(--button-border-color);
+  color:            var(--button-color);
+}
+
+#ConfirmDialog button[disabled] {
+  background-color: var(--button-disabled-background-color);
+  border-color:     var(--button-disabled-border-color);
+  color:            var(--button-disabled-color);
+  cursor:           var(--cursor-disabled);
+}
+
+#ConfirmDialog button:not([disabled]):hover {
+  background-color: var(--button-hover-background-color);
+  background-image: NONE !important;
+  border-color:     var(--button-hover-border-color);
+  color:            var(--button-hover-color);
+  text-shadow:      1px 1px var(--button-hover-text-shadow-color);
+}
+
+
+#confirmDialogOKButton {
+}
+
+#confirmDialogCancelButton {
+}
+
+

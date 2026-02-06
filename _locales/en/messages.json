@@ -1,0 +1,108 @@
+{
+  "extensionName": {
+    "message": "Trash Incinerator"
+  },
+  "extensionDescription": {
+    "message": "This Thunderbid Extension provides a button that Incinerates Trash, that is, it permanently deletes all messages in the Trash Folder"
+  },
+  "options_tiOptionsPageTitle": {
+    "message": "Trash Incinerator Options"
+  },
+  "options_tiOptionsPanelTitle": {
+    "message": "Trash Incinerator Options"
+  },
+  "options_tiConfirmIncinerateCheckBox.label": {
+    "message": "Confirm before Incinerating"
+  },
+  "options_tiEmptySubFolderseCheckBox.label": {
+    "message": "Incinerate Messages in Sub-Folders as well"
+  },
+  "options_tiDeleteSubFoldersCheckBox.label": {
+    "message": "Also Delete the Sub-Folders after Incinerating Messages"
+  },
+  "options_tiOptionPopupButton.label": {
+    "message": "Display Options in a Popup Window"
+  },
+  "options_tiDoneButton.label": {
+    "message": "Done"
+  },
+  "ConfirmDialogPageTitle": {
+    "message": "Confirm"
+  },
+  "tiConfirmDialog_okButton.label": {
+    "message": "Okay"
+  },
+  "tiConfirmDialog_cancelButton.label": {
+    "message": "Cancel"
+  },
+  "tiConfirmDialog_yesButton.label": {
+    "message": "Yes"
+  },
+  "tiConfirmDialog_noButton.label": {
+    "message": "No"
+  },
+  "tiConfirmDialogTitle": {
+    "message": "Please confirm"
+  },
+  "tiIncinerateConfirmDialog_title": {
+    "message": "Confirm that you want to Incinerate Messages in The Trash Folder"
+  },
+  "tiIncinerateConfirmDialog_continueButton.label": {
+    "message": "Continue"
+  },
+  "tiIncinerateConfirmDialog_cancelButton.label": {
+    "message": "Cancel"
+  },
+  "tiIncinerateConfirmDialog_message_continue": {
+    "message": "Do you wish to continue?"
+  },
+  "tiIncinerateOneMessageConfirmDialog_message1": {
+    "message": "One message will be incinerated:"
+  },
+  "tiIncinerateOneMessageConfirmDialog_message2": {
+    "message": "It will be deleted permanently."
+  },
+  "tiIncinerateOneMessageConfirmDialog_message3": {
+    "message": "You will not be able to recover it."
+  },
+  "tiIncinerateOneMessageConfirmDialog_message4": {
+    "message": " "
+  },
+  "tiIncinerateCountMessagesConfirmDialog_message1": {
+    "message": "$NN$ messages will be incinerated.",
+    "placeholders": {
+      "nn": {
+        "content": "$1"
+      }
+    }
+  },
+  "tiIncinerateCountMessagesConfirmDialog_message2": {
+    "message": "These messages will be deleted permanently."
+  },
+  "tiIncinerateCountMessagesConfirmDialog_message3": {
+    "message": "You will not be able to recover them."
+  },
+  "tiIncinerateCountMessagesConfirmDialog_message4": {
+    "message": " "
+  },
+  "tiIncinerateOneFolderConfirmDialog_message1": {
+    "message": "One Sub-Folder will be deleted."
+  },
+  "tiIncinerateOneFolderConfirmDialog_message2": {
+    "message": " "
+  },
+  "tiIncinerateCountFoldersConfirmDialog_message1": {
+    "message": "$NN$ Sub-Folders will be deleted.",
+    "placeholders": {
+      "nn": {
+        "content": "$1"
+      }
+    }
+  },
+  "tiIncinerateCountFoldersConfirmDialog_message2": {
+    "message": " "
+  },
+  "X": {
+    "message": "X"
+  }
+}

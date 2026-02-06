@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <script type="module" src="optionsUI.js" defer></script>
+    <link rel="stylesheet" type="text/css" href="./optionsUI.css"/>
+    <title data-l10n-id="options_tiOptionsPageTitle">Trash Incinerator Options</title>
+  </head>
+
+  <body>
+
+    <div id="tiOptionsWrapper">
+
+      <div id="tiExtensionOptionsTitlePanel" >
+        <div id="tiExtensionOptionsTitle" class="title" data-l10n-id="options_tiOptionsPanelTitle">
+          options_tiOptionsPanelTitle
+        </div>
+
+        <div class="option-error" error-for="tiExtensionOptionsTitle" error="false">
+          <span class="option-error-icon-large"><img src="../images/icons/forbidden_16x16.png"/></span>
+          <label class="option-error-text" error-for="tiExtensionOptionsTitle"></label>
+        </div>
+      <div>
+
+      <div id="tiExtensionOptionsPanel">
+
+        <table class="options-panel" id="tiExtensionOptions">
+
+          <tr class="option-panel">
+            <td>
+              <label for="tiConfirmIncinerate" data-l10n-id="options_tiConfirmIncinerateCheckBox.label"></label>
+            </td>
+            <td>
+              <input type="checkbox" id="tiConfirmIncinerate" class="tiGeneralOption"></select>
+            </td>
+          </tr>
+
+          <tr class="option-panel">
+            <td>
+              <label for="tiEmptySubFolders" data-l10n-id="options_tiEmptySubFolderseCheckBox.label"></label>
+            </td>
+            <td>
+              <input type="checkbox" id="tiEmptySubFolders" class="tiGeneralOption"></select>
+            </td>
+          </tr>
+
+          <tr class="option-panel">
+            <td>
+              <label for="tiDeleteSubFolders" data-l10n-id="options_tiDeleteSubFoldersCheckBox.label"></label>
+            </td>
+            <td>
+              <input type="checkbox" id="tiDeleteSubFolders" class="tiGeneralOption"></select>
+            </td>
+          </tr>
+
+        </table> <!-- END OF <table id="tiExtensionOptions"> -->
+
+        <div class="button-panel">
+          <button id="tiOptionPopupButton" style="display: none;">
+            <label for="tiOptionPopupButton" data-l10n-id="options_tiOptionPopupButton.label"></label>
+          </button>
+          <button id="tiDoneButton" style="display: none;">
+            <label for="tiDoneButton" data-l10n-id="options_tiDoneButton.label"></label>
+          </button>
+        </div>
+
+
+        <div id="tiExtensionOptionsPanelSpacer"></div>
+
+      </div> <!-- END OF <div id="tiExtensionOptionsPanel"> -->
+
+    </div> <!-- END OF <div id="tiOptionsWrapper"> -->
+
+  </body>
+</html>
