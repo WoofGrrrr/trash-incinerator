@@ -25,7 +25,7 @@ export class TrashIncineratorOptions {
   ];
 
   static #DEFAULT_OPTION_VALUES = {
-    'tiConfirmIncinerate': false,
+    'tiConfirmIncinerate': true,
     'tiEmptySubFolders':   true,
     'tiDeleteSubFolders':  true,
     'tiStringOption1':     '',

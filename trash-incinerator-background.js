@@ -37,7 +37,7 @@ class TrashIncinerator {
 
   #INFO                = true;
   #LOG                 = true;
-  #DEBUG               = true;
+  #DEBUG               = false;
   #WARN                = true;
 
   #logger              = new Logger();
