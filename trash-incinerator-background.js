@@ -140,16 +140,16 @@ class TrashIncinerator {
     const displayedFolder = currentMailTab?.displayedFolder;
 
     if (! displayedFolder) {
-      this.debugAlways("no displayed folder");
+      this.error("No displayed folder");
     } else {
       this.#lastDisplayedFolder = displayedFolder;
 
       const trashFolder = await this.getTrashFolder(displayedFolder);
 
       if (! trashFolder) {
-        this.debugAlways("no trash folder");
+        this.error("No trash folder");
       } else if (trashFolder.isVirtual) {
-        this.debugAlways("trash folder isVirtual");
+        this.error("Trash folder isVirtual");
       } else {
         await this.#updateActionButton(trashFolder);
       }
@@ -270,9 +270,9 @@ class TrashIncinerator {
         var trashFolder = await this.getTrashFolder(activeMailTab.displayedFolder);
 
         if (! trashFolder) {
-          this.debugAlways("no trash folder");
+          this.error("No trash folder");
         } else if (trashFolder.isVirtual) {
-          this.debugAlways("trash folder isVirtual");
+          this.error("Trash folder isVirtual");
         } else {
           await this.#updateActionButton(trashFolder);
         }
@@ -301,9 +301,9 @@ class TrashIncinerator {
       const trashFolder = await this.getTrashFolder(displayedFolder);
 
       if (! trashFolder) {
-        this.debugAlways("no trash folder");
+        this.error("No trash folder");
       } else if (trashFolder.isVirtual) {
-        this.debugAlways("trash folder isVirtual");
+        this.error("Trash folder isVirtual");
       } else {
         await this.#updateActionButton(trashFolder);
       }
@@ -331,22 +331,22 @@ class TrashIncinerator {
   async #deleteSubFoldersOptionChanged(newValue, oldValue) {
     this.#option_deleteSubFolders = newValue;
 
-    this.debugAlways(`newValue ... ${newValue}`);
+    this.debug(`newValue ... ${newValue}`);
 
     const currentMailTab  = await messenger.mailTabs.getCurrent();
     const displayedFolder = currentMailTab?.displayedFolder;
 
     if (! displayedFolder) {
-      this.debugAlways("no displayed folder");
+      this.error("No displayed folder");
     } else {
       this.#lastDisplayedFolder = displayedFolder;
 
       const trashFolder = await this.getTrashFolder(displayedFolder);
 
       if (! trashFolder) {
-        this.debugAlways("no trash folder");
+        this.error("No trash folder");
       } else if (trashFolder.isVirtual) {
-        this.debugAlways("trash folder isVirtual");
+        this.error("Trash folder isVirtual");
       } else {
         await this.#updateActionButton(trashFolder);
       }
@@ -356,7 +356,7 @@ class TrashIncinerator {
 
 
   async #folderCreated(folder) {  // folders.MailFolder
-    this.debugAlways( "\n========== MailFolder CREATED ==========",
+    this.debug( "\n========== MailFolder CREATED ==========",
                 `\n- id .......... "${folder.id}"`,
                 `\n- name ........ "${folder.name}"`,
                 `\n- accountId ... "${folder.accountId}"`,
@@ -367,11 +367,11 @@ class TrashIncinerator {
 
     const parentFolders = await messenger.folders.getParentFolders(folder.id, false); // includeSubFolders=false;
     if (! parentFolders || parentFolders.length < 1) {
-      this.debugAlways("\n- NO parentFolders:");
+      this.error("\n- NO parentFolders:");
 
     } else {
       const firstFolder = parentFolders.pop();
-      this.debugAlways( "\n========== First MailFolder ==========",
+      this.debug( "\n========== First MailFolder ==========",
                   `\n- id .......... "${firstFolder.id}"`,
                   `\n- name ........ "${firstFolder.name}"`,
                   `\n- accountId ... "${firstFolder.accountId}"`,
@@ -386,7 +386,7 @@ class TrashIncinerator {
   }
 
   async #folderMoved(originalFolder, movedFolder) {  // folders.MailFolder, folders.MailFolder
-    this.debugAlways( "\n========== MailFolder MOVED ==========",
+    this.debug( "\n========== MailFolder MOVED ==========",
                 "---original--------",
                 `\n- id .......... "${originalFolder.id}"`,
                 `\n- name ........ "${originalFolder.name}"`,
@@ -405,7 +405,7 @@ class TrashIncinerator {
   }
 
   async #folderDeleted(folder) {  // folders.MailFolder - but be CAREFUL!!!  This Folder has been deleted.  You can't do anything with it, not even call get() for it!!!
-    this.debugAlways( "\n========== MailFolder DELETED ==========",
+    this.debug( "\n========== MailFolder DELETED ==========",
                 `\n- id .......... "${folder.id}"`,
                 `\n- name ........ "${folder.name}"`,
                 `\n- accountId ... "${folder.accountId}"`,
@@ -418,9 +418,9 @@ class TrashIncinerator {
     const trashFolder = await this.getTrashFolder(folder);
 
     if (! trashFolder) {
-      this.debugAlways("no trash folder");
+      this.error("No trash folder");
     } else if (trashFolder.isVirtual) {
-      this.debugAlways("trash folder isVirtual");
+      this.error("Trash folder isVirtual");
     } else {
       await this.#updateActionButton(trashFolder);
     }
@@ -465,7 +465,7 @@ class TrashIncinerator {
       const currentMailTab  = await messenger.mailTabs.getCurrent();
       const displayedFolder = currentMailTab?.displayedFolder;
 
-      this.debugAlways( "\n========== Trash MailFolder ==========",
+      this.debug( "\n========== Trash MailFolder ==========",
                   `\n- id .......... "${trashFolder.id}"`,
                   `\n- name ........ "${trashFolder.name}"`,
                   `\n- accountId ... "${trashFolder.accountId}"`,
@@ -479,7 +479,7 @@ class TrashIncinerator {
                 );
 
       if (! displayedFolder) {
-        this.debugAlways( "\n========== NO MailFolder is currently being displayed ==========");
+        this.error( "\n========== NO MailFolder is currently being displayed ==========");
       } else {
         this.#lastDisplayedFolder = displayedFolder;
 
@@ -494,7 +494,7 @@ class TrashIncinerator {
       }
 
       const viewingSameAccount = displayedFolder && (displayedFolder.accountId === trashFolder.accountId);
-      this.debugAlways(`\n========== viewingSameAccount? ${viewingSameAccount} ==========`);
+      this.debug(`\n========== viewingSameAccount? ${viewingSameAccount} ==========`);
 
       if (! viewingSameAccount) {
         //
@@ -511,7 +511,7 @@ class TrashIncinerator {
                                         && trashFolder.subFolders.length > 0
                                       );
 
-        this.debugAlways(`\n========== enableActionButton? ${enableActionButton} ==========`);
+        this.debug(`\n========== enableActionButton? ${enableActionButton} ==========`);
 
         if (enableActionButton) {
           await messenger.browserAction.enable();
@@ -551,9 +551,9 @@ class TrashIncinerator {
         const trashFolder = await this.getTrashFolder(displayedFolder);
 
         if (! trashFolder) {
-          this.debugAlways("no trash folder");
+          this.error("No trash folder");
         } else if (trashFolder.isVirtual) {
-          this.debugAlways("trash folder isVirtual");
+          this.error("Trash folder isVirtual");
         } else {
           var requireConfirmation = this.#option_confirmIncinerate;
 
@@ -653,7 +653,7 @@ class TrashIncinerator {
 
   // - data: an array of integer: msgId or folderId
   async #showIncinerateConfirmDialog(incineratingMessages, data) {
-    this.debugAlways( "\n--- begin:",
+    this.debug( "\n--- begin:",
                 `\n incineratingMessages=${incineratingMessages}`,
                 `\n data="${data}"`,
                 `\n (typeof data)="${typeof data}"`,
