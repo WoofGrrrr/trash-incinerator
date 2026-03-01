@@ -5,8 +5,6 @@ import { getBrowserAndVersion, getExtensionInfo, getExtensionId, getExtensionNam
 
 
 /* TO DO:
- * - Enable/Disable Button when Trash is Filled/Empty
- * - Show Confirmation
  *
  * - Options:
  *   - Delete Sub-Folders or NO
@@ -144,7 +142,7 @@ class TrashIncinerator {
     } else {
       this.#lastDisplayedFolder = displayedFolder;
 
-      const trashFolder = await this.getTrashFolder(displayedFolder);
+      const trashFolder = await this.#getTrashFolder(displayedFolder);
 
       if (! trashFolder) {
         this.error("No trash folder");
@@ -267,7 +265,7 @@ class TrashIncinerator {
       } else {
         this.#lastDisplayedFolder = activeMailTab.displayedFolder;
 
-        var trashFolder = await this.getTrashFolder(activeMailTab.displayedFolder);
+        var trashFolder = await this.#getTrashFolder(activeMailTab.displayedFolder);
 
         if (! trashFolder) {
           this.error("No trash folder");
@@ -297,14 +295,24 @@ class TrashIncinerator {
                 "\n- subFolders:", displayedFolder.subFolders,
               );
 
-    if (prevLastDisplayedFolder && prevLastDisplayedFolder.accountId !== displayedFolder.accountId) {
-      const trashFolder = await this.getTrashFolder(displayedFolder);
+    if (! prevLastDisplayedFolder || prevLastDisplayedFolder.accountId !== displayedFolder.accountId) {
+      const trashFolder = await this.#getTrashFolder(displayedFolder);
 
       if (! trashFolder) {
         this.error("No trash folder");
       } else if (trashFolder.isVirtual) {
         this.error("Trash folder isVirtual");
       } else {
+        this.debug( "\n========== TRASH MailFolder ==========",
+                    `\n- id .......... "${trashFolder.id}"`,
+                    `\n- name ........ "${trashFolder.name}"`,
+                    `\n- accountId ... "${trashFolder.accountId}"`,
+                    `\n- account ..... "${this.getAccountName(trashFolder.accountId, "(none)")}"`,
+                    `\n- isRoot ...... ${trashFolder.isRoot}`,
+                    `\n- isVirtual ... ${trashFolder.isVirtual}`,
+                    "\n- specialUse:", trashFolder.specialUse,
+                    "\n- subFolders:", trashFolder.subFolders,
+                  );
         await this.#updateActionButton(trashFolder);
       }
     }
@@ -341,7 +349,7 @@ class TrashIncinerator {
     } else {
       this.#lastDisplayedFolder = displayedFolder;
 
-      const trashFolder = await this.getTrashFolder(displayedFolder);
+      const trashFolder = await this.#getTrashFolder(displayedFolder);
 
       if (! trashFolder) {
         this.error("No trash folder");
@@ -415,7 +423,7 @@ class TrashIncinerator {
                 "\n- subFolders:", folder.subFolders,
               );
 
-    const trashFolder = await this.getTrashFolder(folder);
+    const trashFolder = await this.#getTrashFolder(folder);
 
     if (! trashFolder) {
       this.error("No trash folder");
@@ -503,7 +511,8 @@ class TrashIncinerator {
         //this.#option_deleteSubFolders
 
 ////////const totalMessageCount = trashFolderInfo.totalMessageCount;              // MABXXX DOES NOT ALWAYS INCLUDE SUB-FOLDERS???
-        const totalMessageCount = await this.getTotalMessageCount(trashFolder);
+        const totalMessageCount = await this.#getTotalMessageCount(trashFolder);
+        this.debug(`\n========== totalMessageCount=${totalMessageCount} ==========`);
 
         const enableActionButton = totalMessageCount > 0
                                    || ( this.#option_deleteSubFolders
@@ -522,15 +531,20 @@ class TrashIncinerator {
     }
   }
 
-  async getTotalMessageCount(folder) {
+  async #getTotalMessageCount(folder) {
     var count = 0;
 
     const folderInfo = await messenger.folders.getFolderInfo(folder.id);
-    if (folderInfo && folderInfo.totalMessageCount) count += folderInfo.totalMessageCount;
+    if (! folderInfo) {
+      this.debug(`NO FolderInfo for folder id="${folder.id}" name="${folder.name}"`);
+    } else {
+      this.debug(`Folder id="${folder.id}" name="${folder.name}" totalMessageCount="${folderInfo.totalMessageCount}`);
+      if (folderInfo.totalMessageCount) count += folderInfo.totalMessageCount;
+    }
 
     if (folder.subFolders) {
       for (const subFolder of folder.subFolders) {
-        count += await this.getTotalMessageCount(subFolder);
+        count += await this.#getTotalMessageCount(subFolder);
       }
     }
 
@@ -548,7 +562,7 @@ class TrashIncinerator {
       if (displayedFolder) {
         this.#lastDisplayedFolder = displayedFolder;
 
-        const trashFolder = await this.getTrashFolder(displayedFolder);
+        const trashFolder = await this.#getTrashFolder(displayedFolder);
 
         if (! trashFolder) {
           this.error("No trash folder");
@@ -892,7 +906,7 @@ class TrashIncinerator {
 
 
 
-  async getTrashFolder(folder) { // get the 'trash' folder with the same accountId as this folder, or just this folder if it IS a 'trash' folder
+  async #getTrashFolder(folder) { // get the 'trash' folder with the same accountId as this folder, or just this folder if it IS a 'trash' folder
     var trashFolder;
 
     if (folder.specialUse && folder.specialUse.includes('trash')) {
