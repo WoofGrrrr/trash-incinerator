@@ -378,6 +378,7 @@ class TrashIncinerator {
       this.error("\n- NO parentFolders:");
 
     } else {
+      // if the new Folder is a descendent of the trash folder, this require a change to the Action Buttion
       const firstFolder = parentFolders.pop();
       this.debug( "\n========== First MailFolder ==========",
                   `\n- id .......... "${firstFolder.id}"`,
@@ -392,6 +393,8 @@ class TrashIncinerator {
       }
     }
   }
+
+
 
   async #folderMoved(originalFolder, movedFolder) {  // folders.MailFolder, folders.MailFolder
     this.debug( "\n========== MailFolder MOVED ==========",
@@ -422,6 +425,12 @@ class TrashIncinerator {
                 "\n- specialUse:", folder.specialUse,
                 "\n- subFolders:", folder.subFolders,
               );
+
+    // Since we CAN NOT get the parent folders of this deleted folder,
+    // there is no way to know if it was a descendent of the Trash Folder
+    // other than to keep track of the folder hierarchy, which I am NOT
+    // going to do.  So get the Trash Folder with the same Account ID
+    // as this folder and call #updateActionButton() on that.
 
     const trashFolder = await this.#getTrashFolder(folder);
 
@@ -456,19 +465,20 @@ class TrashIncinerator {
               );
 
 
-////if (! folder.isVirtual && folder.specialUse && folder.specialUse.includes('trash') && folderInfo.totalMessageCount !== undefined) { // there only if it CHANGED!!!
     if (! folder.isVirtual && folder.specialUse && folder.specialUse.includes('trash')) {
       await this.#updateActionButton(folder);
     }
   }
 
-  // folder must not be virtual and must have 'trash' in folder.specialUse
+
+
+  // Folder must NOT be virtual and must have 'trash' in folder.specialUse
   async #updateActionButton(folder) {
     if (folder.isVirtual || ! folder.specialUse || ! folder.specialUse.includes('trash')) {
       this.error(`Folder is not a non-virtual 'trash' Folder, id="${folder.id}"`, folder);
 
     } else {
-      const trashFolder     = await messenger.folders.get(folder.id, true); // includeSubFolders=true;
+      const trashFolder     = await messenger.folders.get(folder.id, true); // includeSubFolders=true - We need the sub-folders!!!
       const trashFolderInfo = await messenger.folders.getFolderInfo(trashFolder.id);
       const currentMailTab  = await messenger.mailTabs.getCurrent();
       const displayedFolder = currentMailTab?.displayedFolder;
@@ -487,6 +497,7 @@ class TrashIncinerator {
                 );
 
       if (! displayedFolder) {
+        // the Action Button won't be visible
         this.error( "\n========== NO MailFolder is currently being displayed ==========");
       } else {
         this.#lastDisplayedFolder = displayedFolder;
@@ -510,7 +521,7 @@ class TrashIncinerator {
         //this.#option_emptySubFolders
         //this.#option_deleteSubFolders
 
-////////const totalMessageCount = trashFolderInfo.totalMessageCount;              // MABXXX DOES NOT ALWAYS INCLUDE SUB-FOLDERS???
+////////const totalMessageCount = trashFolderInfo.totalMessageCount;  // DOES NOT INCLUDE SUB-FOLDERS???
         const totalMessageCount = await this.#getTotalMessageCount(trashFolder);
         this.debug(`\n========== totalMessageCount=${totalMessageCount} ==========`);
 
@@ -531,6 +542,9 @@ class TrashIncinerator {
     }
   }
 
+
+
+  // recursively calculate the total of the messages in the given Folder and all its sub-folders
   async #getTotalMessageCount(folder) {
     var count = 0;
 
@@ -971,7 +985,7 @@ async function onInstalled(reason, previousVersion) {
   await messenger.browserAction.disable();
 
   const extId      = getExtensionId("");
-  const extName    = getExtensionName("Identity Manager Plus");
+  const extName    = getExtensionName("Trash Incinerator");
   const extVersion = getExtensionVersion();
 
 //const options = new TrashIncineratorOptions();
