@@ -955,24 +955,24 @@ messenger.management.onEnabled.addListener(     async (extensionInfo) => onExten
 messenger.management.onDisabled.addListener(    async (extensionInfo) => onExtensionDisabled(    extensionInfo ) );
 
 async function onExtensionInstalled(info) { // management.ExtensionInfo
-//if (info.id === getExtensionId()) {
+  if (info.id === getExtensionId()) {
     console.log(`===== Extension Installed: id="${info.id}" name="${info.name}" version="${info.version}" installType="${info.installType}" mayDisable=${info.mayDisable}`);
-//}
+  }
 }
 async function onExtensionUninstalled(info) { // management.ExtensionInfo
-//if (info.id === getExtensionId()) {
+  if (info.id === getExtensionId()) {
     console.log(`===== Extension Uninstalled: id="${info.id}" name="${info.name}" version="${info.version}"`);
-//}
+  }
 }
 async function onExtensionEnabled(info) { // management.ExtensionInfo
-//if (info.id === getExtensionId()) {
+  if (info.id === getExtensionId()) {
     console.log(`===== Extension Enabled: id="${info.id}" name="${info.name}" version="${info.version}"`);
 //}
 }
 async function onExtensionDisabled(info) { // management.ExtensionInfo
-//if (info.id === getExtensionId()) {
+  if (info.id === getExtensionId()) {
     console.log(`===== Extension Disabled: id="${info.id}" name="${info.name}" version="${info.version}" disabledReason="${info.disabledReason}"`);
-//}
+  }
 }
 
 
