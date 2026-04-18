@@ -138,7 +138,7 @@ class TrashIncinerator {
     const displayedFolder = currentMailTab?.displayedFolder;
 
     if (! displayedFolder) {
-      this.error("No displayed folder");
+      this.debug("No displayed folder");
     } else {
       this.#lastDisplayedFolder = displayedFolder;
 
@@ -345,7 +345,7 @@ class TrashIncinerator {
     const displayedFolder = currentMailTab?.displayedFolder;
 
     if (! displayedFolder) {
-      this.error("No displayed folder");
+      this.debug("No displayed folder");
     } else {
       this.#lastDisplayedFolder = displayedFolder;
 
@@ -375,7 +375,7 @@ class TrashIncinerator {
 
     const parentFolders = await messenger.folders.getParentFolders(folder.id, false); // includeSubFolders=false;
     if (! parentFolders || parentFolders.length < 1) {
-      this.error("\n- NO parentFolders:");
+      this.error("\n- NO parentFolders:", folder);
 
     } else {
       // if the new Folder is a descendent of the trash folder, this require a change to the Action Buttion
@@ -498,7 +498,7 @@ class TrashIncinerator {
 
       if (! displayedFolder) {
         // the Action Button won't be visible
-        this.error( "\n========== NO MailFolder is currently being displayed ==========");
+        this.debug( "\n========== NO MailFolder is currently being displayed ==========");
       } else {
         this.#lastDisplayedFolder = displayedFolder;
 
@@ -967,7 +967,7 @@ async function onExtensionUninstalled(info) { // management.ExtensionInfo
 async function onExtensionEnabled(info) { // management.ExtensionInfo
   if (info.id === getExtensionId()) {
     console.log(`===== Extension Enabled: id="${info.id}" name="${info.name}" version="${info.version}"`);
-//}
+  }
 }
 async function onExtensionDisabled(info) { // management.ExtensionInfo
   if (info.id === getExtensionId()) {
